@@ -465,6 +465,54 @@
   @media (prefers-reduced-motion: reduce){
     *{ transition:none !important; }
   }
+
+  /* ---------- LIGHTBOX ---------- */
+  .gallery-item{ cursor:zoom-in; }
+
+  .lightbox{
+    position:fixed;
+    inset:0;
+    z-index:999;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:32px;
+    background:rgba(8,28,23,0.92);
+    backdrop-filter:blur(4px);
+    opacity:0;
+    transition:opacity 0.25s ease;
+  }
+  .lightbox.open{
+    display:flex;
+    opacity:1;
+  }
+  .lightbox img{
+    max-width:100%;
+    max-height:100%;
+    border-radius:10px;
+    box-shadow:0 20px 60px -12px rgba(0,0,0,0.6);
+    transform:scale(0.96);
+    transition:transform 0.25s ease;
+  }
+  .lightbox.open img{ transform:scale(1); }
+
+  .lightbox-close{
+    position:absolute;
+    top:22px; right:26px;
+    width:40px; height:40px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(228,199,102,0.3);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition:background 0.18s ease;
+  }
+  .lightbox-close:hover{ background:rgba(255,255,255,0.16); }
+  .lightbox-close svg{ width:18px; height:18px; color:var(--gold-soft); }
+
+  @media (prefers-reduced-motion: reduce){
+    .lightbox, .lightbox img{ transition:none !important; }
+  }
 </style>
 <noscript><style>.reveal{opacity:1 !important; transform:none !important;}</style></noscript>
 </head>
@@ -614,6 +662,13 @@
 
   </div>
 
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-close" id="lightboxClose">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </div>
+    <img id="lightboxImg" src="" alt="">
+  </div>
+
   <div class="contact-panel reveal">
     <div class="block-head"><span class="tag">04</span><h2>Contact Details</h2></div>
     <div class="contact-grid">
@@ -657,6 +712,34 @@
       }, { threshold: 0.12 });
       document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     }
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+
+    function openLightbox(src, alt){
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || '';
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(){
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.gallery-item img').forEach(img => {
+      img.addEventListener('click', () => openLightbox(img.getAttribute('src'), img.getAttribute('alt')));
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
   </script>
 
 </body>
