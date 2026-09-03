@@ -3,2810 +3,563 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Parth Pandya — Software Engineer</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Bricolage+Grotesque:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Archivo:wght@700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --ac: #e94560;
-  --ac2: #f5a623;
-  --ac3: #00d4aa;
-  --ac4: #a855f7;
-
-  --serif: 'Playfair Display', Georgia, serif;
-  --sans: 'Bricolage Grotesque', sans-serif;
+  --ink: #0a0a0a;
+  --paper: #f7f4ec;
+  --lime: #ccff33;
+  --pink: #ff3d7f;
+  --blue: #3d7fff;
+  --border-w: 3px;
+  --shadow-off: 7px;
+  --sans: 'Space Grotesk', sans-serif;
+  --display: 'Archivo', sans-serif;
   --mono: 'JetBrains Mono', monospace;
-
-  --radius-lg: 12px;
 }
 
-/* ===================== LIGHT MODE ===================== */
-
-:root {
-  --bg: #fafaf8;
-  --bg2: #f0ede8;
-  --bg3: #e2ddd7;
-  --surface: #ffffff;
-
-  --body-text: #0d0d1a;
-  --body-text-secondary: #2e2e42;
-  --muted: #3d3b55;
-
-  --border: rgba(0,0,0,0.1);
-  --border-strong: rgba(0,0,0,0.18);
-
-  --card-shadow: 0 2px 20px rgba(0,0,0,0.09);
-
-  --inv-text: #f5f5f7;
-}
-
-/* ===================== DARK MODE ===================== */
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0d0d1a;
-    --bg2: #13131f;
-    --bg3: #1e1e2e;
-    --surface: #181828;
-
-    --body-text: #eeeef5;
-    --body-text-secondary: #c8c8e0;
-    --muted: #9898bc;
-
-    --border: rgba(255,255,255,0.09);
-    --border-strong: rgba(255,255,255,0.18);
-
-    --card-shadow: 0 2px 20px rgba(0,0,0,0.4);
-
-    --inv-text: #f5f5f7;
-  }
-}
-
-/* ===================== GLOBAL ===================== */
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 70px;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--bg);
-  color: var(--body-text);
+  background: var(--paper);
+  color: var(--ink);
   font-family: var(--sans);
-  line-height: 1.6;
-  overflow-x: hidden;
+  line-height: 1.55;
+}
+
+a { color: inherit; }
+::selection { background: var(--ink); color: var(--lime); }
+
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 1.75rem; }
+
+/* ---------- hard-shadow utility ---------- */
+
+.hard {
+  border: var(--border-w) solid var(--ink);
+  box-shadow: var(--shadow-off) var(--shadow-off) 0 var(--ink);
+  border-radius: 0;
+}
+
+/* ---------- nav ---------- */
+
+header {
+  border-bottom: var(--border-w) solid var(--ink);
+  background: var(--paper);
+  position: sticky; top: 0; z-index: 60;
+}
+.nav-inner {
+  max-width: 1040px; margin: 0 auto; padding: 0 1.75rem;
+  height: 68px; display: flex; align-items: center; justify-content: space-between;
+}
+.brand {
+  font-family: var(--display); font-weight: 900; font-size: 1.15rem;
+  text-decoration: none; color: var(--ink);
+  padding: 5px 10px;
+  background: var(--lime);
+  border: var(--border-w) solid var(--ink);
+}
+nav.links { display: flex; gap: 0; list-style: none; }
+nav.links a {
+  text-decoration: none; font-family: var(--mono); font-size: 0.78rem; font-weight: 500;
+  color: var(--ink); padding: 0.5rem 0.9rem; text-transform: uppercase;
+  border-right: 2px solid var(--ink);
+}
+nav.links a:first-child { border-left: 2px solid var(--ink); }
+nav.links a:hover { background: var(--ink); color: var(--paper); }
+
+.menu-btn { display: none; background: var(--lime); border: var(--border-w) solid var(--ink); font-size: 1.1rem; cursor: pointer; padding: 4px 10px; }
+.mob-nav { display: none; flex-direction: column; border-bottom: var(--border-w) solid var(--ink); }
+.mob-nav.open { display: flex; }
+.mob-nav a { text-decoration: none; color: var(--ink); padding: 0.9rem 1.75rem; border-top: 2px solid var(--ink); font-family: var(--mono); font-size: 0.9rem; text-transform: uppercase; }
+
+/* ---------- hero ---------- */
+
+.hero { padding: 4rem 0 3.5rem; border-bottom: var(--border-w) solid var(--ink); }
+.hero-tag {
+  display: inline-block; font-family: var(--mono); font-size: 0.78rem; font-weight: 500;
+  text-transform: uppercase; padding: 5px 12px; background: var(--pink); color: var(--paper);
+  border: var(--border-w) solid var(--ink); margin-bottom: 1.6rem;
+}
+.hero h1 {
+  font-family: var(--display); font-weight: 900; font-size: clamp(2.6rem, 7vw, 5rem);
+  line-height: 0.95; letter-spacing: -0.02em; margin-bottom: 1.6rem;
+}
+.hero h1 mark { background: var(--lime); color: var(--ink); padding: 0 0.15em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.hero p { font-size: 1.1rem; max-width: 56ch; margin-bottom: 2rem; }
+.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 0.85rem 1.5rem; font-family: var(--mono); font-weight: 500; font-size: 0.85rem;
+  text-transform: uppercase; text-decoration: none; color: var(--ink);
+  background: var(--paper); border: var(--border-w) solid var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.btn:hover { transform: translate(-2px,-2px); box-shadow: 7px 7px 0 var(--ink); }
+.btn:active { transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--ink); }
+.btn-fill { background: var(--ink); color: var(--paper); }
+
+/* ---------- section shell ---------- */
+
+section { padding: 4rem 0; border-bottom: var(--border-w) solid var(--ink); }
+section:last-of-type { border-bottom: none; }
+
+.sec-head { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+.sec-num { font-family: var(--mono); font-size: 0.85rem; background: var(--ink); color: var(--lime); padding: 3px 9px; }
+.sec-title { font-family: var(--display); font-weight: 900; font-size: clamp(1.9rem, 4vw, 2.6rem); text-transform: uppercase; }
+
+/* ---------- tech stack keyboard ---------- */
+
+.stack-layout { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.stack-detail-name { font-family: var(--display); font-weight: 900; font-size: 2.2rem; margin-bottom: 0.5rem; text-transform: uppercase; }
+.stack-detail-desc { font-size: 1rem; max-width: 42ch; margin: 0 auto 1.5rem; }
+
+.iso-wrap { perspective: 2800px; perspective-origin: 50% 20%; }
+.iso-plate {
+  background: var(--ink);
+  border: var(--border-w) solid var(--ink);
+  box-shadow: 10px 10px 0 var(--lime);
+  padding: 26px;
+  display: inline-grid;
+  grid-template-columns: repeat(5, 66px);
+  grid-auto-rows: 66px;
+  gap: 11px;
+  transform: rotateX(56deg) rotateZ(45deg);
+  transform-style: preserve-3d;
+}
+.key {
+  position: relative; overflow: visible;
+  border: 2px solid var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: transform 0.12s ease;
+}
+.key:hover { transform: translateZ(10px); }
+.key.active { transform: translateZ(-4px); outline: 3px solid var(--lime); outline-offset: 2px; }
+.key img { width: 28px; height: 28px; filter: brightness(0) invert(1); pointer-events: none; }
+.key-fallback {
+  font-family: var(--mono); font-weight: 500; font-size: 0.72rem; color: #fff;
+  pointer-events: none; letter-spacing: -0.02em;
+}
+.key-ripple {
+  position: absolute; border-radius: 50%; background: rgba(255,255,255,0.6); pointer-events: none;
+  transform: translate(-50%,-50%); animation: ripple-out 0.5s ease-out forwards;
+}
+@keyframes ripple-out { from { width: 4px; height: 4px; opacity: 0.9; } to { width: 90px; height: 90px; opacity: 0; } }
+
+/* ---------- experience ---------- */
+
+.exp-list { display: grid; gap: 1.4rem; }
+.exp-card { background: var(--paper); padding: 1.7rem 1.9rem; position: relative; }
+.exp-card:nth-child(odd) { box-shadow: var(--shadow-off) var(--shadow-off) 0 var(--lime); }
+.exp-card:nth-child(even) { box-shadow: var(--shadow-off) var(--shadow-off) 0 var(--pink); }
+.exp-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.9rem; flex-wrap: wrap; }
+.exp-role { font-family: var(--display); font-weight: 800; font-size: 1.3rem; text-transform: uppercase; }
+.exp-org { font-family: var(--mono); font-size: 0.82rem; margin-top: 0.2rem; }
+.exp-dates { font-family: var(--mono); font-size: 0.78rem; background: var(--ink); color: var(--paper); padding: 3px 9px; white-space: nowrap; }
+.exp-card ul { list-style: none; display: grid; gap: 0.5rem; margin-bottom: 1rem; }
+.exp-card li { font-size: 0.94rem; padding-left: 1.3rem; position: relative; }
+.exp-card li::before { content: '▲'; position: absolute; left: 0; font-size: 0.6rem; top: 0.35em; color: var(--pink); }
+.badge-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.tech-badge {
+  display: flex; align-items: center; gap: 5px; font-family: var(--mono); font-size: 0.72rem;
+  border: 2px solid var(--ink); padding: 3px 8px 3px 6px;
+}
+.tech-badge img { width: 13px; height: 13px; }
+
+/* ---------- projects ---------- */
+
+.proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+.proj-card {
+  background: var(--paper); text-decoration: none; color: inherit;
+  border: var(--border-w) solid var(--ink);
+  box-shadow: var(--shadow-off) var(--shadow-off) 0 var(--ink);
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.proj-card:hover { transform: translate(-3px,-3px); box-shadow: 10px 10px 0 var(--ink); }
+.proj-thumb {
+  height: 120px; display: flex; align-items: center; justify-content: center;
+  font-family: var(--display); font-weight: 900; font-size: 1.5rem; color: var(--ink);
+  border-bottom: var(--border-w) solid var(--ink);
+}
+.proj-body { padding: 1.2rem 1.35rem 1.4rem; }
+.proj-card h3 { font-family: var(--display); font-weight: 800; font-size: 1.05rem; text-transform: uppercase; margin-bottom: 0.5rem; }
+.proj-card p { font-size: 0.87rem; margin-bottom: 0.9rem; }
+.proj-pill { display: inline-block; font-family: var(--mono); font-size: 0.7rem; padding: 3px 9px; background: var(--ink); color: var(--lime); }
+
+/* ---------- education ---------- */
+
+.edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+.edu-card { background: var(--paper); padding: 1.7rem 1.9rem; border: var(--border-w) solid var(--ink); box-shadow: var(--shadow-off) var(--shadow-off) 0 var(--blue); }
+.edu-deg { font-family: var(--display); font-weight: 800; font-size: 1.1rem; text-transform: uppercase; margin-bottom: 0.35rem; }
+.edu-uni { font-family: var(--mono); font-size: 0.85rem; margin-bottom: 0.2rem; }
+.edu-dates { font-family: var(--mono); font-size: 0.76rem; opacity: 0.7; margin-bottom: 0.9rem; }
+.edu-badge { display: inline-block; font-family: var(--mono); font-size: 0.78rem; background: var(--ink); color: var(--paper); padding: 3px 10px; margin-bottom: 0.9rem; }
+.edu-courses { display: flex; flex-wrap: wrap; gap: 6px; }
+.edu-course { font-family: var(--mono); font-size: 0.72rem; padding: 3px 9px; border: 2px solid var(--ink); }
+
+/* ---------- contact ---------- */
+
+.contact-title { font-family: var(--display); font-weight: 900; font-size: clamp(2.2rem, 5vw, 3.4rem); text-transform: uppercase; line-height: 1; margin-bottom: 2.5rem; }
+.contact-title mark { background: var(--lime); padding: 0 0.15em; }
+.contact-layout { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 2rem; }
+.contact-card { background: var(--paper); border: var(--border-w) solid var(--ink); box-shadow: var(--shadow-off) var(--shadow-off) 0 var(--pink); padding: 1.9rem; }
+.contact-card h3 { font-family: var(--display); font-weight: 800; font-size: 1.1rem; text-transform: uppercase; margin-bottom: 0.4rem; }
+.contact-card > p { font-size: 0.88rem; margin-bottom: 1.3rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; margin-bottom: 0.9rem; }
+.field label { display: block; font-family: var(--mono); font-size: 0.74rem; text-transform: uppercase; margin-bottom: 0.35rem; }
+.field input, .field textarea {
+  width: 100%; background: var(--paper); border: 2px solid var(--ink); border-radius: 0;
+  padding: 0.7rem 0.85rem; color: var(--ink); font-family: var(--sans); font-size: 0.9rem; outline: none;
+}
+.field input:focus, .field textarea:focus { box-shadow: 3px 3px 0 var(--lime); }
+.field textarea { resize: vertical; min-height: 90px; }
+.char-count { text-align: right; font-family: var(--mono); font-size: 0.72rem; margin: 0.3rem 0 0.9rem; }
+.form-note { font-size: 0.78rem; margin-bottom: 1.1rem; opacity: 0.75; }
+.send-btn {
+  width: 100%; background: var(--ink); color: var(--lime); border: var(--border-w) solid var(--ink);
+  padding: 0.85rem; font-family: var(--mono); font-size: 0.88rem; text-transform: uppercase; font-weight: 500;
+  cursor: pointer; box-shadow: 5px 5px 0 var(--ink); transition: transform 0.1s, box-shadow 0.1s;
+}
+.send-btn:hover { transform: translate(-2px,-2px); box-shadow: 7px 7px 0 var(--ink); }
+.contact-links { display: grid; gap: 10px; align-content: start; }
+.contact-item {
+  display: flex; align-items: center; gap: 12px; padding: 0.85rem 1.1rem;
+  border: 2px solid var(--ink); text-decoration: none; color: var(--ink); font-size: 0.87rem;
+  background: var(--paper); transition: transform 0.1s;
+}
+.contact-item:hover { transform: translate(-2px,-2px); box-shadow: 4px 4px 0 var(--ink); }
+.ci-icon { font-family: var(--mono); font-size: 0.7rem; background: var(--ink); color: var(--paper); padding: 2px 6px; }
+
+footer { padding: 1.6rem 0; text-align: center; font-family: var(--mono); font-size: 0.78rem; }
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 760px) {
+  nav.links { display: none; }
+  .menu-btn { display: block; }
+  .proj-grid, .edu-grid, .contact-layout, .form-row { grid-template-columns: 1fr; }
+  .iso-plate { grid-template-columns: repeat(5, 42px); grid-auto-rows: 42px; padding: 16px; gap: 8px; }
+  .key img { width: 20px; height: 20px; }
+  .key-fallback { font-size: 0.6rem; }
+  .stack-detail-name { font-size: 1.6rem; }
+  .shadow-off { --shadow-off: 5px; }
 }
-
-::selection {
-  background: var(--ac);
-  color: #fff;
-}
-
-::-webkit-scrollbar {
-  width: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--ac);
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg);
-}
-
-/* ===================== NAV ===================== */
-
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 300;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 0 clamp(1rem, 4vw, 3rem);
-  height: 60px;
-
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-}
-
-.nav-brand {
-  font-family: var(--serif);
-  font-size: 1.2rem;
-  font-weight: 900;
-  text-decoration: none;
-  color: var(--body-text);
-
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.nav-brand-badge {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-
-  background: linear-gradient(135deg, var(--ac), var(--ac4));
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  color: #fff;
-}
-
-.nav-right {
-  display: flex;
-  align-items: center;
-}
-
-.nav-links {
-  display: flex;
-  gap: clamp(0.75rem, 2vw, 2rem);
-  list-style: none;
-}
-
-.nav-links a {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-
-  text-decoration: none;
-  color: var(--body-text-secondary);
-
-  font-weight: 500;
-  transition: color 0.2s;
-}
-
-.nav-links a:hover {
-  color: var(--ac);
-}
-
-/* ===================== MOBILE NAV ===================== */
-
-.hamburger {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-
-  color: var(--body-text);
-  font-size: 1.4rem;
-}
-
-.mob-nav {
-  display: none;
-
-  position: fixed;
-  inset: 60px 0 0 0;
-
-  z-index: 290;
-
-  background: var(--bg);
-
-  padding: 2rem 1.5rem;
-
-  flex-direction: column;
-
-  border-top: 1px solid var(--border);
-
-  overflow-y: auto;
-}
-
-.mob-nav.open {
-  display: flex;
-}
-
-.mob-nav a {
-  font-family: var(--mono);
-  font-size: 1rem;
-
-  text-transform: uppercase;
-  text-decoration: none;
-
-  color: var(--body-text);
-
-  padding: 1rem 0;
-
-  border-bottom: 1px solid var(--border);
-}
-
-/* ===================== MAGAZINE SECTIONS ===================== */
-
-.mag-section {
-  padding: clamp(3rem, 6vw, 6rem)
-           clamp(1.5rem, 4vw, 3rem);
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.mag-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-
-  margin-bottom: 3rem;
-
-  gap: 2rem;
-
-  flex-wrap: wrap;
-
-  border-bottom: 3px solid var(--body-text);
-
-  padding-bottom: 1rem;
-}
-
-.mag-section-num {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-
-  letter-spacing: 0.15em;
-
-  text-transform: uppercase;
-
-  color: var(--muted);
-
-  margin-bottom: 0.4rem;
-
-  font-weight: 600;
-}
-
-.mag-title {
-  font-family: var(--serif);
-
-  font-size: clamp(2.2rem, 5vw, 4rem);
-
-  font-weight: 900;
-
-  line-height: 0.95;
-
-  letter-spacing: -0.02em;
-}
-
-.mag-title .grad {
-  background: linear-gradient(
-    90deg,
-    var(--ac),
-    var(--ac4)
-  );
-
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  background-clip: text;
-}
-
-.mag-kicker {
-  font-family: var(--mono);
-
-  font-size: 0.7rem;
-
-  color: var(--muted);
-
-  letter-spacing: 0.06em;
-
-  text-align: right;
-
-  max-width: 220px;
-
-  line-height: 1.6;
-
-  font-weight: 500;
-}
-
-/* ===================== ABOUT ===================== */
-
-.about-bg {
-  background: var(--bg);
-}
-
-.about-layout {
-  display: grid;
-
-  grid-template-columns: 3fr 2fr;
-
-  gap: clamp(2rem, 5vw, 5rem);
-
-  align-items: start;
-}
-
-.about-copy p {
-  color: var(--body-text-secondary);
-
-  margin-bottom: 1.1rem;
-
-  font-size: 1rem;
-
-  line-height: 1.85;
-}
-
-.about-copy p:first-child {
-  font-size: 1.15rem;
-
-  color: var(--body-text);
-
-  font-weight: 500;
-}
-
-.about-copy strong {
-  color: var(--body-text);
-
-  font-weight: 700;
-}
-
-.skill-section {
-  display: grid;
-
-  gap: 1rem;
-}
-
-.skill-card {
-  background: var(--surface);
-
-  border: 1px solid var(--border-strong);
-
-  border-radius: var(--radius-lg);
-
-  padding: 1.1rem;
-
-  box-shadow: var(--card-shadow);
-
-  transition: transform 0.2s;
-}
-
-.skill-card:hover {
-  transform: translateY(-2px);
-}
-
-.skill-card-top {
-  display: flex;
-
-  align-items: center;
-
-  gap: 8px;
-
-  margin-bottom: 0.7rem;
-}
-
-.skill-dot {
-  width: 8px;
-  height: 8px;
-
-  border-radius: 50%;
-
-  flex-shrink: 0;
-}
-
-.skill-card-label {
-  font-family: var(--mono);
-
-  font-size: 0.63rem;
-
-  letter-spacing: 0.12em;
-
-  text-transform: uppercase;
-
-  color: var(--muted);
-
-  font-weight: 700;
-}
-
-/* ===================== PILLS ===================== */
-
-.pill-row {
-  display: flex;
-
-  flex-wrap: wrap;
-
-  gap: 6px;
-}
-
-.pill {
-  font-family: var(--mono);
-
-  font-size: 0.65rem;
-
-  padding: 4px 10px;
-
-  border-radius: 4px;
-
-  background: var(--bg3);
-
-  color: var(--body-text);
-
-  border: 1px solid var(--border-strong);
-
-  transition: all 0.2s;
-
-  font-weight: 500;
-}
-
-.pill:hover {
-  border-color: var(--ac);
-
-  color: var(--ac);
-}
-
-/* =========================================================
-   EXPERIENCE
-   FIXED: CONTENT IS ALWAYS VISIBLE
-   ========================================================= */
-
-.exp-bg {
-  background: var(--bg2);
-}
-
-.exp-grid {
-  display: grid;
-
-  gap: 0;
-}
-
-.exp-row {
-  display: grid;
-
-  grid-template-columns: 150px minmax(0, 1fr);
-
-  gap: 2rem;
-
-  padding: 2.5rem 0;
-
-  border-bottom: 1px solid var(--border);
-
-  /*
-    IMPORTANT:
-    The previous version had opacity: 0.
-    This made the entire experience section disappear
-    when the animation JavaScript did not execute.
-  */
-
-  opacity: 1;
-
-  transform: none;
-
-  transition:
-    opacity 0.5s ease,
-    transform 0.5s ease;
-}
-
-.exp-row.visible {
-  opacity: 1;
-
-  transform: none;
-}
-
-.exp-row:last-child {
-  border-bottom: none;
-}
-
-.exp-left-col {
-  padding-top: 4px;
-
-  min-width: 0;
-}
-
-.exp-yr {
-  font-family: var(--mono);
-
-  font-size: 0.67rem;
-
-  letter-spacing: 0.08em;
-
-  color: var(--body-text-secondary);
-
-  margin-bottom: 0.5rem;
-
-  line-height: 1.5;
-
-  font-weight: 500;
-}
-
-.exp-yr span {
-  display: block;
-
-  color: var(--ac);
-
-  font-weight: 700;
-
-  margin-bottom: 2px;
-}
-
-.exp-right-col {
-  min-width: 0;
-
-  overflow: visible;
-}
-
-.exp-header {
-  display: flex;
-
-  align-items: flex-start;
-
-  justify-content: space-between;
-
-  gap: 1rem;
-
-  margin-bottom: 0.75rem;
-
-  flex-wrap: wrap;
-}
-
-.exp-title-group {
-  min-width: 0;
-}
-
-.exp-jobtitle {
-  font-family: var(--serif);
-
-  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-
-  font-weight: 700;
-
-  line-height: 1.2;
-
-  margin-bottom: 4px;
-
-  color: var(--body-text);
-
-  overflow-wrap: anywhere;
-}
-
-.exp-company {
-  font-family: var(--mono);
-
-  font-size: 0.73rem;
-
-  color: var(--muted);
-
-  letter-spacing: 0.04em;
-
-  font-weight: 500;
-
-  overflow-wrap: anywhere;
-}
-
-.exp-tag {
-  font-family: var(--mono);
-
-  font-size: 0.6rem;
-
-  letter-spacing: 0.08em;
-
-  text-transform: uppercase;
-
-  padding: 3px 10px;
-
-  border-radius: 3px;
-
-  white-space: nowrap;
-
-  background: linear-gradient(
-    135deg,
-    var(--ac),
-    var(--ac4)
-  );
-
-  color: #fff;
-
-  flex-shrink: 0;
-}
-
-.exp-bullets {
-  list-style: none;
-
-  display: grid;
-
-  gap: 0.5rem;
-
-  margin: 0;
-
-  padding: 0;
-}
-
-.exp-bullets li {
-  font-size: 0.9rem;
-
-  color: var(--body-text-secondary);
-
-  padding-left: 1.2rem;
-
-  position: relative;
-
-  line-height: 1.7;
-
-  overflow-wrap: anywhere;
-}
-
-.exp-bullets li::before {
-  content: '—';
-
-  position: absolute;
-
-  left: 0;
-
-  color: var(--ac);
-
-  font-family: var(--mono);
-
-  font-size: 0.75rem;
-}
-
-/* ===================== PROJECTS ===================== */
-
-.proj-bg {
-  background: var(--bg);
-}
-
-.proj-editorial {
-  display: grid;
-
-  grid-template-columns:
-    repeat(3, 1fr);
-
-  gap: 1px;
-
-  background: var(--border-strong);
-
-  border: 1px solid var(--border-strong);
-
-  border-radius: var(--radius-lg);
-
-  overflow: hidden;
-}
-
-.proj-tile {
-  background: var(--surface);
-
-  padding: 2rem;
-
-  transition: all 0.3s ease;
-
-  cursor: pointer;
-
-  position: relative;
-
-  overflow: hidden;
-
-  display: flex;
-
-  flex-direction: column;
-}
-
-.proj-tile:hover {
-  background: var(--bg3);
-}
-
-.proj-tile.featured {
-  grid-column: span 2;
-
-  background: #0e0e20;
-
-  color: var(--inv-text);
-}
-
-.proj-tile.featured:hover {
-  background: #171730;
-}
-
-.proj-accent {
-  width: 36px;
-
-  height: 3px;
-
-  border-radius: 2px;
-
-  margin-bottom: 1.25rem;
-}
-
-.proj-tile-num {
-  font-family: var(--mono);
-
-  font-size: 0.62rem;
-
-  letter-spacing: 0.12em;
-
-  color: var(--muted);
-
-  margin-bottom: 0.5rem;
-}
-
-.proj-tile.featured .proj-tile-num {
-  color: rgba(245,245,247,0.55);
-}
-
-.proj-tile-title {
-  font-family: var(--serif);
-
-  font-size: clamp(1.1rem, 2vw, 1.4rem);
-
-  font-weight: 700;
-
-  margin-bottom: 0.65rem;
-
-  line-height: 1.1;
-
-  color: var(--body-text);
-}
-
-.proj-tile.featured .proj-tile-title {
-  color: #fff;
-}
-
-.proj-tile-desc {
-  font-size: 0.86rem;
-
-  color: var(--body-text-secondary);
-
-  line-height: 1.7;
-
-  margin-bottom: 1.25rem;
-
-  flex: 1;
-}
-
-.proj-tile.featured .proj-tile-desc {
-  color: #c8c8e0;
-}
-
-.proj-pills {
-  display: flex;
-
-  flex-wrap: wrap;
-
-  gap: 5px;
-
-  margin-bottom: 1rem;
-}
-
-.proj-pill {
-  font-family: var(--mono);
-
-  font-size: 0.58rem;
-
-  letter-spacing: 0.06em;
-
-  padding: 3px 8px;
-
-  border-radius: 3px;
-
-  border: 1px solid var(--border-strong);
-
-  color: var(--body-text-secondary);
-
-  background: var(--bg2);
-}
-
-.proj-tile.featured .proj-pill {
-  border-color: rgba(255,255,255,0.25);
-
-  color: #d0d0ea;
-
-  background: rgba(255,255,255,0.07);
-}
-
-.proj-link-btn {
-  font-family: var(--mono);
-
-  font-size: 0.68rem;
-
-  color: var(--ac);
-
-  text-decoration: none;
-
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 6px;
-
-  transition: gap 0.2s;
-
-  margin-top: auto;
-
-  font-weight: 600;
-}
-
-.proj-tile.featured .proj-link-btn {
-  color: var(--ac2);
-}
-
-.proj-link-btn:hover {
-  gap: 12px;
-}
-
-/* ===================== EDUCATION ===================== */
-
-.edu-bg {
-  background: var(--bg2);
-}
-
-.edu-spread {
-  display: grid;
-
-  grid-template-columns: 1fr 1fr;
-
-  gap: 1.5rem;
-}
-
-.edu-tile {
-  background: var(--surface);
-
-  border-radius: var(--radius-lg);
-
-  overflow: hidden;
-
-  border: 1px solid var(--border-strong);
-
-  box-shadow: var(--card-shadow);
-
-  transition: transform 0.3s;
-}
-
-.edu-tile:hover {
-  transform: translateY(-4px);
-}
-
-.edu-tile-banner {
-  height: 6px;
-
-  background: linear-gradient(
-    90deg,
-    var(--ac),
-    var(--ac4)
-  );
-}
-
-.edu-tile-banner.blue {
-  background: linear-gradient(
-    90deg,
-    var(--ac2),
-    var(--ac3)
-  );
-}
-
-.edu-body {
-  padding: 1.75rem;
-}
-
-.edu-deg {
-  font-family: var(--serif);
-
-  font-size: clamp(1rem, 2vw, 1.25rem);
-
-  font-weight: 700;
-
-  margin-bottom: 0.3rem;
-
-  color: var(--body-text);
-}
-
-.edu-uni {
-  font-family: var(--mono);
-
-  font-size: 0.73rem;
-
-  color: var(--ac2);
-
-  margin-bottom: 0.25rem;
-
-  font-weight: 600;
-}
-
-.edu-dates {
-  font-family: var(--mono);
-
-  font-size: 0.67rem;
-
-  color: var(--muted);
-
-  margin-bottom: 1rem;
-
-  font-weight: 500;
-}
-
-.edu-gpa-badge {
-  display: inline-block;
-
-  font-family: var(--mono);
-
-  font-size: 0.68rem;
-
-  padding: 3px 10px;
-
-  border-radius: 4px;
-
-  background: linear-gradient(
-    135deg,
-    var(--ac),
-    var(--ac4)
-  );
-
-  color: #fff;
-
-  margin-bottom: 1rem;
-
-  font-weight: 700;
-}
-
-.edu-courses {
-  display: flex;
-
-  flex-wrap: wrap;
-
-  gap: 6px;
-}
-
-.edu-course {
-  font-family: var(--mono);
-
-  font-size: 0.63rem;
-
-  padding: 4px 9px;
-
-  border-radius: 3px;
-
-  background: var(--bg3);
-
-  color: var(--body-text);
-
-  border: 1px solid var(--border-strong);
-
-  font-weight: 500;
-}
-
-/*
-  Resume download area intentionally removed/hidden.
-*/
-
-/* ===================== CONTACT ===================== */
-
-.contact-bg {
-  background: #08080f;
-
-  color: var(--inv-text);
-}
-
-.contact-inner {
-  display: grid;
-
-  grid-template-columns: 1fr 1fr;
-
-  gap: clamp(2rem, 5vw, 5rem);
-
-  align-items: start;
-}
-
-.contact-headline {
-  font-family: var(--serif);
-
-  font-size: clamp(2.5rem, 6vw, 5rem);
-
-  font-weight: 900;
-
-  line-height: 0.9;
-
-  letter-spacing: -0.02em;
-
-  margin-bottom: 1.5rem;
-
-  color: #fff;
-}
-
-.contact-headline .grad {
-  background: linear-gradient(
-    90deg,
-    var(--ac),
-    var(--ac4)
-  );
-
-  -webkit-background-clip: text;
-
-  -webkit-text-fill-color: transparent;
-
-  background-clip: text;
-}
-
-.contact-sub {
-  color: #c0c0d8;
-
-  margin-bottom: 2rem;
-
-  font-size: 0.97rem;
-
-  line-height: 1.85;
-}
-
-.contact-cta {
-  display: flex;
-
-  gap: 12px;
-
-  flex-wrap: wrap;
-}
-
-.cc-btn {
-  padding: 0.85rem 2rem;
-
-  border-radius: 6px;
-
-  background: linear-gradient(
-    135deg,
-    var(--ac),
-    var(--ac4)
-  );
-
-  color: #fff;
-
-  font-family: var(--mono);
-
-  font-size: 0.72rem;
-
-  letter-spacing: 0.08em;
-
-  text-transform: uppercase;
-
-  text-decoration: none;
-
-  border: none;
-
-  transition: all 0.25s;
-
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 8px;
-}
-
-.cc-btn:hover {
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 8px 24px
-    rgba(233,69,96,0.45);
-}
-
-.contact-links-grid {
-  display: grid;
-
-  gap: 12px;
-}
-
-.cl-item {
-  display: flex;
-
-  align-items: center;
-
-  gap: 14px;
-
-  padding: 1rem 1.25rem;
-
-  border-radius: 8px;
-
-  background: rgba(255,255,255,0.07);
-
-  border: 1px solid rgba(255,255,255,0.15);
-
-  text-decoration: none;
-
-  color: #d8d8ee;
-
-  transition: all 0.25s;
-
-  font-size: 0.9rem;
-
-  font-weight: 500;
-
-  overflow-wrap: anywhere;
-}
-
-.cl-item:hover {
-  background: rgba(255,255,255,0.15);
-
-  border-color: rgba(255,255,255,0.35);
-
-  transform: translateX(6px);
-
-  color: #fff;
-}
-
-.cl-icon {
-  width: 36px;
-
-  height: 36px;
-
-  border-radius: 8px;
-
-  flex-shrink: 0;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  font-family: var(--mono);
-
-  font-size: 0.55rem;
-
-  font-weight: 700;
-
-  letter-spacing: 0.06em;
-
-  text-transform: uppercase;
-}
-
-/* ===================== FOOTER ===================== */
-
-footer {
-  background: #08080f;
-
-  padding: 1.5rem 2rem;
-
-  text-align: center;
-
-  border-top:
-    1px solid rgba(255,255,255,0.1);
-
-  font-family: var(--mono);
-
-  font-size: 0.65rem;
-
-  color: rgba(245,245,247,0.45);
-
-  letter-spacing: 0.08em;
-}
-
-/* ===================== RESPONSIVE ===================== */
-
-@media (max-width: 1024px) {
-
-  .proj-editorial {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .proj-tile.featured {
-    grid-column: span 2;
-  }
-
-}
-
-@media (max-width: 768px) {
-
-  .about-layout,
-  .edu-spread,
-  .contact-inner {
-    grid-template-columns: 1fr;
-
-    gap: 2rem;
-  }
-
-  /*
-    EXPERIENCE MOBILE FIX
-  */
-
-  .exp-row {
-    grid-template-columns: 1fr;
-
-    gap: 0.75rem;
-
-    padding: 2rem 0;
-  }
-
-  .exp-left-col {
-    padding-top: 0;
-  }
-
-  .exp-header {
-    align-items: flex-start;
-  }
-
-  .exp-jobtitle {
-    font-size: 1.35rem;
-  }
-
-  .exp-company {
-    font-size: 0.68rem;
-  }
-
-  .exp-bullets li {
-    font-size: 0.86rem;
-
-    line-height: 1.7;
-  }
-
-  .proj-editorial {
-    grid-template-columns: 1fr;
-  }
-
-  .proj-tile.featured {
-    grid-column: span 1;
-  }
-
-  .nav-links {
-    display: none;
-  }
-
-  .hamburger {
-    display: block;
-  }
-
-  .stat-mag-row {
-    grid-template-columns: 1fr 1fr;
-  }
-
-}
-
-@media (max-width: 480px) {
-
-  .mag-section {
-    padding:
-      3rem 1rem;
-  }
-
-  .mag-title {
-    font-size: 2rem;
-  }
-
-  .mag-kicker {
-    text-align: left;
-
-    max-width: 100%;
-  }
-
-  .mag-header {
-    margin-bottom: 2rem;
-  }
-
-  .exp-row {
-    padding: 1.75rem 0;
-  }
-
-  .exp-tag {
-    font-size: 0.55rem;
-
-    padding: 3px 8px;
-  }
-
-  .exp-bullets li {
-    font-size: 0.82rem;
-  }
-
-  .stat-mag-row {
-    grid-template-columns: 1fr 1fr;
-  }
-
-}
-
-/* ===================== REDUCED MOTION ===================== */
 
 @media (prefers-reduced-motion: reduce) {
-
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-
+  html { scroll-behavior: auto; }
 }
 </style>
 </head>
-
 <body>
 
-<!-- =====================================================
-     NAVIGATION
-     ===================================================== -->
-
-<nav>
-
-  <a href="#about" class="nav-brand">
-
-    <div class="nav-brand-badge">
-      PP
-    </div>
-
-    Parth Pandya
-
-  </a>
-
-  <div class="nav-right">
-
-    <ul class="nav-links">
-
-      <li>
-        <a href="#about">
-          About
-        </a>
-      </li>
-
-      <li>
-        <a href="#experience">
-          Work
-        </a>
-      </li>
-
-      <li>
-        <a href="#projects">
-          Projects
-        </a>
-      </li>
-
-      <li>
-        <a href="#education">
-          Education
-        </a>
-      </li>
-
-      <li>
-        <a href="#contact">
-          Contact
-        </a>
-      </li>
-
-    </ul>
-
-    <button
-      class="hamburger"
-      id="ham"
-      aria-label="Open menu"
-    >
-      ☰
-    </button>
-
+<header>
+  <div class="nav-inner">
+    <a href="#top" class="brand">Parth Pandya</a>
+    <nav class="links">
+      <a href="#skills">Stack</a>
+      <a href="#experience">Work</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Edu</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
   </div>
+  <div class="mob-nav" id="mobNav">
+    <a href="#skills">Stack</a>
+    <a href="#experience">Work</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Edu</a>
+    <a href="#contact">Contact</a>
+  </div>
+</header>
 
-</nav>
+<div class="wrap" id="top">
 
+  <section class="hero" style="border-bottom: var(--border-w) solid var(--ink);">
+    <div class="hero-tag">Open to roles — mid 2026 · open to relocate anywhere</div>
+    <h1>Backend systems<br>that <mark>hold up.</mark></h1>
+    <p>Software engineer with 3+ years shipping production APIs for clients in the US and UK. Currently a research assistant at Tennessee State University, applying machine learning to glucose biosensor data.</p>
+    <div class="hero-cta">
+      <a href="mailto:parthpandya9914@gmail.com" class="btn btn-fill">Email me</a>
+      <a href="https://github.com/parth3899" target="_blank" rel="noopener noreferrer" class="btn">GitHub</a>
+      <a href="https://linkedin.com/in/parth-pandya-dev" target="_blank" rel="noopener noreferrer" class="btn">LinkedIn</a>
+    </div>
+  </section>
 
-<!-- =====================================================
-     MOBILE NAV
-     ===================================================== -->
+  <section id="skills">
+    <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">Tech Stack</h2></div>
+    <div class="stack-layout">
+      <div class="stack-detail-name" id="stackName">Python</div>
+      <div class="stack-detail-desc" id="stackDesc">Used for ML crop-yield models and biosensor data analysis.</div>
+      <div class="iso-wrap">
+        <div class="iso-plate" id="isoPlateMain"></div>
+      </div>
+    </div>
+  </section>
 
-<div class="mob-nav" id="mobNav">
+  <section id="experience">
+    <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">Experience</h2></div>
+    <div class="exp-list">
 
-  <a href="#about" class="mob-link">
-    About
-  </a>
+      <div class="exp-card">
+        <div class="exp-top">
+          <div><div class="exp-role">Research Assistant</div><div class="exp-org">Tennessee State University</div></div>
+          <div class="exp-dates">Jun 2025 — Present</div>
+        </div>
+        <ul>
+          <li>Run an AI/ML literature review for glucose biosensor healthcare applications.</li>
+          <li>Evaluate models for biosensor data interpretation and real-world integration.</li>
+          <li>Work with faculty on the design of an AI-based glucose monitoring system.</li>
+          <li>Write up technical reports and academic presentations.</li>
+        </ul>
+      </div>
 
-  <a href="#experience" class="mob-link">
-    Work
-  </a>
+      <div class="exp-card">
+        <div class="exp-top">
+          <div><div class="exp-role">Teaching Assistant</div><div class="exp-org">Tennessee State University</div></div>
+          <div class="exp-dates">Aug 2024 — May 2025</div>
+        </div>
+        <ul>
+          <li>Supported 100+ undergrads in Probability &amp; Statistics and Python Programming.</li>
+          <li>Drove a 20% average grade improvement through 1:1 and group tutoring.</li>
+          <li>Graded assignments with feedback on OOP, data structures, and debugging.</li>
+          <li>Led MATLAB lab sessions and exam review workshops.</li>
+        </ul>
+      </div>
 
-  <a href="#projects" class="mob-link">
-    Projects
-  </a>
+      <div class="exp-card">
+        <div class="exp-top">
+          <div><div class="exp-role">Web App Developer</div><div class="exp-org">Stack Summation, Ahmedabad</div></div>
+          <div class="exp-dates">Jul 2022 — Jun 2024</div>
+        </div>
+        <ul>
+          <li>Architected scalable Django and FastAPI backends with REST APIs for US and UK clients.</li>
+          <li>Optimized SQL — joins, indexing, stored procedures — improving retrieval by ~30%.</li>
+          <li>Integrated Google Maps, Drive, and PayPal APIs for an agriculture platform with 500+ users.</li>
+          <li>Built ML crop-yield prediction models, boosting forecast accuracy by 25%.</li>
+          <li>Deployed a UK production app in Docker with CI/CD and centralized logging.</li>
+        </ul>
+        <div class="badge-row" id="badge-stacksummation"></div>
+      </div>
 
-  <a href="#education" class="mob-link">
-    Education
-  </a>
+      <div class="exp-card">
+        <div class="exp-top">
+          <div><div class="exp-role">Backend Developer</div><div class="exp-org">MindTrunk, Ahmedabad</div></div>
+          <div class="exp-dates">Jul 2021 — Jun 2022</div>
+        </div>
+        <ul>
+          <li>Built real-time image analysis pipelines on Raspberry Pi, 30% faster processing.</li>
+          <li>Wrote FastAPI backend services that cut average response times by ~50%.</li>
+          <li>Integrated AWS S3, cutting video load times by 40%.</li>
+          <li>Built a multi-engine DB layer with SQLAlchemy across SQLite, MySQL, and PostgreSQL.</li>
+        </ul>
+        <div class="badge-row" id="badge-mindtrunk"></div>
+      </div>
 
-  <a href="#contact" class="mob-link">
-    Contact
-  </a>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">Projects</h2></div>
+    <div class="proj-grid" id="projGrid"></div>
+  </section>
+
+  <section id="education">
+    <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">Education</h2></div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-deg">MS, Computer &amp; Info Systems Engineering</div>
+        <div class="edu-uni">Tennessee State University</div>
+        <div class="edu-dates">Aug 2024 — May 2026 · Nashville, TN</div>
+        <div class="edu-badge">GPA 3.33 / 4.0</div>
+        <div class="edu-courses">
+          <span class="edu-course">Artificial Intelligence</span>
+          <span class="edu-course">Software Systems Design</span>
+          <span class="edu-course">Digital Image Processing</span>
+          <span class="edu-course">System Modeling</span>
+          <span class="edu-course">Operating Systems</span>
+          <span class="edu-course">Networks</span>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-deg">BE, Information Technology</div>
+        <div class="edu-uni">Gujarat Technological University</div>
+        <div class="edu-dates">Aug 2017 — May 2021 · Gujarat, India</div>
+        <div class="edu-badge">GPA 3.59 / 4.0</div>
+        <div class="edu-courses">
+          <span class="edu-course">Certified in C — C-DAC 2018</span>
+          <span class="edu-course">Certified in C++ — C-DAC 2019</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">Contact</h2></div>
+    <div class="contact-title">Let's build<br>something <mark>solid.</mark></div>
+    <div class="contact-layout">
+      <div class="contact-card">
+        <h3>Send a message</h3>
+        <p>Or reach me directly at parthpandya9914@gmail.com.</p>
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="field"><label>Full name</label><input type="text" id="cfName" placeholder="Your name" required></div>
+            <div class="field"><label>Email</label><input type="email" id="cfEmail" placeholder="you@example.com" required></div>
+          </div>
+          <div class="field"><label>Message</label><textarea id="cfMessage" maxlength="1000" placeholder="What's on your mind?" required></textarea></div>
+          <div class="char-count"><span id="cfCount">0</span> / 1000</div>
+          <p class="form-note">Your info stays between us — I'll only use it to get back to you.</p>
+          <button type="submit" class="send-btn">Send message →</button>
+        </form>
+      </div>
+      <div class="contact-links">
+        <a class="contact-item" href="mailto:parthpandya9914@gmail.com"><span class="ci-icon">@</span>parthpandya9914@gmail.com</a>
+        <a class="contact-item" href="https://linkedin.com/in/parth-pandya-dev" target="_blank" rel="noopener noreferrer"><span class="ci-icon">in</span>linkedin.com/in/parth-pandya</a>
+        <a class="contact-item" href="https://github.com/parth3899" target="_blank" rel="noopener noreferrer"><span class="ci-icon">gh</span>github.com/parth3899</a>
+        <a class="contact-item" href="tel:+16292777475"><span class="ci-icon">tel</span>+1 629-277-7475</a>
+        <span class="contact-item" style="cursor:default;"><span class="ci-icon">loc</span>Nashville, TN</span>
+      </div>
+    </div>
+  </section>
 
 </div>
 
-
-<!-- =====================================================
-     ABOUT
-     ===================================================== -->
-
-<section
-  class="mag-section about-bg"
-  id="about"
->
-
-  <div class="container">
-
-    <div class="mag-header">
-
-      <div>
-
-        <div class="mag-section-num">
-          Issue 01 — About
-        </div>
-
-        <h2 class="mag-title">
-          Building<br>
-          Systems that
-          <span class="grad">
-            Scale
-          </span>
-        </h2>
-
-      </div>
-
-      <div class="mag-kicker">
-        Backend engineer • Full-stack capable •
-        ML-curious • Research-driven
-      </div>
-
-    </div>
-
-
-    <div class="about-layout">
-
-      <div class="about-copy">
-
-        <p>
-          Software Engineer with 3+ years of
-          hands-on experience building
-          production-grade backend systems —
-          delivering reliable, scalable APIs
-          for clients in the US and UK.
-        </p>
-
-        <p>
-          I've shipped solutions supporting
-          <strong>500+ active users</strong>,
-          reduced API latency by
-          <strong>~50%</strong>, and integrated
-          third-party services including
-          Google Maps, PayPal, and AWS S3.
-          I obsess over clean architecture,
-          well-tested code, and systems that
-          don't break under pressure.
-        </p>
-
-        <p>
-          Currently a Research & Teaching
-          Assistant at Tennessee State University,
-          applying AI/ML to glucose biosensor data
-          for healthcare applications — while
-          finishing my MS in Computer & Information
-          Systems Engineering.
-        </p>
-
-        <p>
-          I've worked across the full stack —
-          Django REST APIs, FastAPI microservices,
-          Vue.js frontends, Docker deployments,
-          CI/CD pipelines — and I bring the same
-          level of care to every layer of the system.
-        </p>
-
-      </div>
-
-
-      <div class="skill-section">
-
-        <div class="skill-card">
-
-          <div class="skill-card-top">
-
-            <div
-              class="skill-dot"
-              style="background:var(--ac)"
-            ></div>
-
-            <div class="skill-card-label">
-              Languages
-            </div>
-
-          </div>
-
-          <div class="pill-row">
-
-            <span class="pill">Python</span>
-            <span class="pill">Java</span>
-            <span class="pill">JavaScript</span>
-            <span class="pill">SQL</span>
-            <span class="pill">PHP</span>
-            <span class="pill">C</span>
-            <span class="pill">C++</span>
-
-          </div>
-
-        </div>
-
-
-        <div class="skill-card">
-
-          <div class="skill-card-top">
-
-            <div
-              class="skill-dot"
-              style="background:var(--ac4)"
-            ></div>
-
-            <div class="skill-card-label">
-              Frameworks
-            </div>
-
-          </div>
-
-          <div class="pill-row">
-
-            <span class="pill">Django</span>
-            <span class="pill">FastAPI</span>
-            <span class="pill">Flask</span>
-            <span class="pill">Vue.js</span>
-            <span class="pill">React</span>
-            <span class="pill">Pandas</span>
-            <span class="pill">NumPy</span>
-            <span class="pill">OpenCV</span>
-
-          </div>
-
-        </div>
-
-
-        <div class="skill-card">
-
-          <div class="skill-card-top">
-
-            <div
-              class="skill-dot"
-              style="background:var(--ac2)"
-            ></div>
-
-            <div class="skill-card-label">
-              Cloud & DevOps
-            </div>
-
-          </div>
-
-          <div class="pill-row">
-
-            <span class="pill">AWS S3/EC2</span>
-            <span class="pill">Azure</span>
-            <span class="pill">Docker</span>
-            <span class="pill">CI/CD</span>
-            <span class="pill">Git</span>
-            <span class="pill">Linux</span>
-
-          </div>
-
-        </div>
-
-
-        <div class="skill-card">
-
-          <div class="skill-card-top">
-
-            <div
-              class="skill-dot"
-              style="background:var(--ac3)"
-            ></div>
-
-            <div class="skill-card-label">
-              Databases
-            </div>
-
-          </div>
-
-          <div class="pill-row">
-
-            <span class="pill">PostgreSQL</span>
-            <span class="pill">MySQL</span>
-            <span class="pill">SQLite</span>
-            <span class="pill">SQLAlchemy</span>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     EXPERIENCE
-     ===================================================== -->
-
-<section
-  class="mag-section exp-bg"
-  id="experience"
->
-
-  <div class="container">
-
-    <div class="mag-header">
-
-      <div>
-
-        <div class="mag-section-num">
-          Issue 02 — Experience
-        </div>
-
-        <h2 class="mag-title">
-          Where I've
-          <span class="grad">
-            Worked
-          </span>
-        </h2>
-
-      </div>
-
-      <div class="mag-kicker">
-        4 roles across India & USA •
-        2021–Present
-      </div>
-
-    </div>
-
-
-    <div class="exp-grid">
-
-
-      <!-- RESEARCH ASSISTANT -->
-
-      <div class="exp-row">
-
-        <div class="exp-left-col">
-
-          <div class="exp-yr">
-
-            <span>
-              Present
-            </span>
-
-            Jun 2025 – Now
-
-          </div>
-
-        </div>
-
-
-        <div class="exp-right-col">
-
-          <div class="exp-header">
-
-            <div class="exp-title-group">
-
-              <div class="exp-jobtitle">
-                Research Assistant
-              </div>
-
-              <div class="exp-company">
-                Tennessee State University ·
-                Nashville, TN
-              </div>
-
-            </div>
-
-            <span class="exp-tag">
-              Research
-            </span>
-
-          </div>
-
-
-          <ul class="exp-bullets">
-
-            <li>
-              Conducting AI/ML literature review
-              for glucose biosensor healthcare
-              applications
-            </li>
-
-            <li>
-              Exploring models for biosensor data
-              interpretation and real-world
-              healthcare integration
-            </li>
-
-            <li>
-              Collaborating with faculty on
-              AI-based glucose monitoring system
-              design
-            </li>
-
-            <li>
-              Drafting technical reports and
-              academic presentations
-            </li>
-
-          </ul>
-
-        </div>
-
-      </div>
-
-
-      <!-- TEACHING ASSISTANT -->
-
-      <div class="exp-row">
-
-        <div class="exp-left-col">
-
-          <div class="exp-yr">
-
-            <span>
-              TSU
-            </span>
-
-            Aug 2024 – May 2025
-
-          </div>
-
-        </div>
-
-
-        <div class="exp-right-col">
-
-          <div class="exp-header">
-
-            <div class="exp-title-group">
-
-              <div class="exp-jobtitle">
-                Teaching Assistant
-              </div>
-
-              <div class="exp-company">
-                Tennessee State University ·
-                Nashville, TN
-              </div>
-
-            </div>
-
-            <span class="exp-tag">
-              Education
-            </span>
-
-          </div>
-
-
-          <ul class="exp-bullets">
-
-            <li>
-              Supported 100+ undergrads in
-              Probability & Statistics and
-              Python Programming
-            </li>
-
-            <li>
-              Drove 20% average grade improvement
-              via 1:1 and group tutoring sessions
-            </li>
-
-            <li>
-              Graded assignments with feedback on
-              OOP, data structures, and debugging
-            </li>
-
-            <li>
-              Guided MATLAB lab sessions and exam
-              review workshops
-            </li>
-
-          </ul>
-
-        </div>
-
-      </div>
-
-
-      <!-- STACK SUMMATION -->
-
-      <div class="exp-row">
-
-        <div class="exp-left-col">
-
-          <div class="exp-yr">
-
-            <span>
-              India
-            </span>
-
-            Jul 2022 – Jun 2024
-
-          </div>
-
-        </div>
-
-
-        <div class="exp-right-col">
-
-          <div class="exp-header">
-
-            <div class="exp-title-group">
-
-              <div class="exp-jobtitle">
-                Web Application Developer
-              </div>
-
-              <div class="exp-company">
-                Stack Summation · Ahmedabad, India
-              </div>
-
-            </div>
-
-            <span class="exp-tag">
-              Full-Time
-            </span>
-
-          </div>
-
-
-          <ul class="exp-bullets">
-
-            <li>
-              Architected scalable Django &
-              FastAPI backends with REST APIs
-              for US & UK clients
-            </li>
-
-            <li>
-              Optimized SQL (joins, indexing,
-              stored procedures) — improved
-              retrieval by ~30%
-            </li>
-
-            <li>
-              Integrated Google Maps, Drive &
-              PayPal APIs for agriculture
-              platform with 500+ users
-            </li>
-
-            <li>
-              Built ML crop yield prediction
-              models, boosting forecast accuracy
-              by 25%
-            </li>
-
-            <li>
-              Deployed UK production app in Docker
-              with CI/CD and centralized logging
-            </li>
-
-            <li>
-              Built Django + GraphQL file
-              automation tool, cutting manual
-              effort by 40%
-            </li>
-
-          </ul>
-
-        </div>
-
-      </div>
-
-
-      <!-- MINDTRUNK -->
-
-      <div class="exp-row">
-
-        <div class="exp-left-col">
-
-          <div class="exp-yr">
-
-            <span>
-              India
-            </span>
-
-            Jul 2021 – Jun 2022
-
-          </div>
-
-        </div>
-
-
-        <div class="exp-right-col">
-
-          <div class="exp-header">
-
-            <div class="exp-title-group">
-
-              <div class="exp-jobtitle">
-                Backend Developer
-              </div>
-
-              <div class="exp-company">
-                MindTrunk · Ahmedabad, India
-              </div>
-
-            </div>
-
-            <span class="exp-tag">
-              Full-Time
-            </span>
-
-          </div>
-
-
-          <ul class="exp-bullets">
-
-            <li>
-              Built real-time image analysis
-              pipelines on Raspberry Pi —
-              30% faster processing
-            </li>
-
-            <li>
-              FastAPI backend services reduced
-              average response times by ~50%
-            </li>
-
-            <li>
-              AWS S3 integration cut video load
-              times by 40%
-            </li>
-
-            <li>
-              Multi-engine DB system via
-              SQLAlchemy across SQLite, MySQL
-              & PostgreSQL
-            </li>
-
-            <li>
-              Water Level Detection System using
-              OpenCV + Tkinter UI on Raspberry Pi
-            </li>
-
-          </ul>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     PROJECTS
-     ===================================================== -->
-
-<section
-  class="mag-section proj-bg"
-  id="projects"
->
-
-  <div class="container">
-
-    <div class="mag-header">
-
-      <div>
-
-        <div class="mag-section-num">
-          Issue 03 — Projects
-        </div>
-
-        <h2 class="mag-title">
-          Things I've
-          <span class="grad">
-            Built
-          </span>
-        </h2>
-
-      </div>
-
-      <div class="mag-kicker">
-        6 selected works • Open source on GitHub
-      </div>
-
-    </div>
-
-
-    <div class="proj-editorial">
-
-
-      <!-- PROJECT 01 -->
-
-      <div
-        class="proj-tile featured"
-        onclick="window.open(
-          'https://github.com/parth3899',
-          '_blank'
-        )"
-      >
-
-        <div
-          class="proj-accent"
-          style="
-            background:
-            linear-gradient(
-              90deg,
-              var(--ac),
-              var(--ac4)
-            );
-          "
-        ></div>
-
-        <div class="proj-tile-num">
-          01 / Featured
-        </div>
-
-        <div class="proj-tile-title">
-          Car Rental System
-        </div>
-
-        <div class="proj-tile-desc">
-          Full-stack car rental platform with
-          secure OAuth (Gmail/Facebook),
-          real-time availability, booking
-          management, and automated email/SMS
-          notifications. Deployed on AWS/Azure
-          with SSL.
-        </div>
-
-        <div class="proj-pills">
-
-          <span class="proj-pill">Django</span>
-          <span class="proj-pill">MySQL</span>
-          <span class="proj-pill">REST API</span>
-          <span class="proj-pill">OAuth</span>
-          <span class="proj-pill">AWS</span>
-          <span class="proj-pill">PayPal</span>
-
-        </div>
-
-        <a
-          href="https://github.com/parth3899"
-          target="_blank"
-          class="proj-link-btn"
-          onclick="event.stopPropagation()"
-        >
-          GitHub →
-        </a>
-
-      </div>
-
-
-      <!-- PROJECT 02 -->
-
-      <div
-        class="proj-tile"
-        onclick="window.open(
-          'https://github.com/parth3899',
-          '_blank'
-        )"
-      >
-
-        <div
-          class="proj-accent"
-          style="background:var(--ac4)"
-        ></div>
-
-        <div class="proj-tile-num">
-          02 / Research
-        </div>
-
-        <div class="proj-tile-title">
-          Hopfield Memory Networks
-        </div>
-
-        <div class="proj-tile-desc">
-          Neural network for associative memory
-          from scratch — Hebbian learning,
-          pattern recall under noise, no ML
-          libraries.
-        </div>
-
-        <div class="proj-pills">
-
-          <span class="proj-pill">Python</span>
-          <span class="proj-pill">MATLAB</span>
-          <span class="proj-pill">NumPy</span>
-          <span class="proj-pill">Matplotlib</span>
-
-        </div>
-
-        <a
-          href="https://github.com/parth3899"
-          target="_blank"
-          class="proj-link-btn"
-          onclick="event.stopPropagation()"
-        >
-          GitHub →
-        </a>
-
-      </div>
-
-
-      <!-- PROJECT 03 -->
-
-      <div
-        class="proj-tile"
-        onclick="window.open(
-          'https://github.com/parth3899',
-          '_blank'
-        )"
-      >
-
-        <div
-          class="proj-accent"
-          style="background:var(--ac3)"
-        ></div>
-
-        <div class="proj-tile-num">
-          03 / IoT
-        </div>
-
-        <div class="proj-tile-title">
-          Water Level Detection
-        </div>
-
-        <div class="proj-tile-desc">
-          Real-time OpenCV detection + Tkinter
-          GUI on Raspberry Pi. Automated boot,
-          30% faster pipeline.
-        </div>
-
-        <div class="proj-pills">
-
-          <span class="proj-pill">OpenCV</span>
-          <span class="proj-pill">Raspberry Pi</span>
-          <span class="proj-pill">Linux</span>
-
-        </div>
-
-        <a
-          href="https://github.com/parth3899"
-          target="_blank"
-          class="proj-link-btn"
-          onclick="event.stopPropagation()"
-        >
-          GitHub →
-        </a>
-
-      </div>
-
-
-      <!-- PROJECT 04 -->
-
-      <div
-        class="proj-tile"
-        onclick="window.open(
-          'https://github.com/parth3899',
-          '_blank'
-        )"
-      >
-
-        <div
-          class="proj-accent"
-          style="background:var(--ac2)"
-        ></div>
-
-        <div class="proj-tile-num">
-          04 / Agriculture
-        </div>
-
-        <div class="proj-tile-title">
-          AI Crop Yield Predictor
-        </div>
-
-        <div class="proj-tile-desc">
-          Django platform for 500+ farmers
-          with ML yield models (25% accuracy
-          boost), Google Maps & Drive APIs.
-        </div>
-
-        <div class="proj-pills">
-
-          <span class="proj-pill">Django</span>
-          <span class="proj-pill">ML</span>
-          <span class="proj-pill">Google Maps</span>
-          <span class="proj-pill">PostgreSQL</span>
-
-        </div>
-
-        <a
-          href="https://github.com/parth3899"
-          target="_blank"
-          class="proj-link-btn"
-          onclick="event.stopPropagation()"
-        >
-          GitHub →
-        </a>
-
-      </div>
-
-
-      <!-- PROJECT 05 -->
-
-      <div
-        class="proj-tile"
-        onclick="window.open(
-          'https://github.com/parth3899',
-          '_blank'
-        )"
-      >
-
-        <div
-          class="proj-accent"
-          style="background:var(--ac)"
-        ></div>
-
-        <div class="proj-tile-num">
-          05 / Analytics
-        </div>
-
-        <div class="proj-tile-title">
-          Ski Resort Weather Analytics
-        </div>
-
-        <div class="proj-tile-desc">
-          30 years of snowfall analysis,
-          Vue.js charts, Django backend —
-          full ski resort weather web app.
-        </div>
-
-        <div class="proj-pills">
-
-          <span class="proj-pill">Python</span>
-          <span class="proj-pill">Vue.js</span>
-          <span class="proj-pill">Django</span>
-
-        </div>
-
-        <a
-          href="https://github.com/parth3899"
-          target="_blank"
-          class="proj-link-btn"
-          onclick="event.stopPropagation()"
-        >
-          GitHub →
-        </a>
-
-      </div>
-
-
-      <!-- PROJECT 06 -->
-
-      <div
-        class="proj-tile"
-        onclick="window.open(
-          'https://github.com/parth3899',
-          '_blank'
-        )"
-      >
-
-        <div
-          class="proj-accent"
-          style="background:var(--ac4)"
-        ></div>
-
-        <div class="proj-tile-num">
-          06 / Automation
-        </div>
-
-        <div class="proj-tile-title">
-          File Conversion Tool
-        </div>
-
-        <div class="proj-tile-desc">
-          Django + GraphQL workflow automation,
-          40% manual effort reduction.
-          E-commerce REST APIs with multi-role
-          support.
-        </div>
-
-        <div class="proj-pills">
-
-          <span class="proj-pill">Django</span>
-          <span class="proj-pill">GraphQL</span>
-          <span class="proj-pill">REST API</span>
-
-        </div>
-
-        <a
-          href="https://github.com/parth3899"
-          target="_blank"
-          class="proj-link-btn"
-          onclick="event.stopPropagation()"
-        >
-          GitHub →
-        </a>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     EDUCATION
-     ===================================================== -->
-
-<section
-  class="mag-section edu-bg"
-  id="education"
->
-
-  <div class="container">
-
-    <div class="mag-header">
-
-      <div>
-
-        <div class="mag-section-num">
-          Issue 04 — Education
-        </div>
-
-        <h2 class="mag-title">
-          Academic
-          <span class="grad">
-            Background
-          </span>
-        </h2>
-
-      </div>
-
-      <div class="mag-kicker">
-        MS completed • BE completed •
-        2 certifications
-      </div>
-
-    </div>
-
-
-    <div class="edu-spread">
-
-
-      <!-- MS -->
-
-      <div class="edu-tile">
-
-        <div class="edu-tile-banner"></div>
-
-        <div class="edu-body">
-
-          <div class="edu-deg">
-            MS — Computer & Information
-            Systems Engineering
-          </div>
-
-          <div class="edu-uni">
-            Tennessee State University
-          </div>
-
-          <div class="edu-dates">
-            Aug 2024 – May 2026 · Nashville, TN
-          </div>
-
-          <div class="edu-gpa-badge">
-            GPA: 3.33 / 4.0
-          </div>
-
-          <div class="edu-courses">
-
-            <span class="edu-course">
-              Artificial Intelligence
-            </span>
-
-            <span class="edu-course">
-              Software Systems Design
-            </span>
-
-            <span class="edu-course">
-              Digital Image Processing
-            </span>
-
-            <span class="edu-course">
-              System Modeling
-            </span>
-
-            <span class="edu-course">
-              Operating Systems
-            </span>
-
-            <span class="edu-course">
-              Networks
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- BE -->
-
-      <div class="edu-tile">
-
-        <div class="edu-tile-banner blue"></div>
-
-        <div class="edu-body">
-
-          <div class="edu-deg">
-            BE — Information Technology
-          </div>
-
-          <div class="edu-uni">
-            Gujarat Technological University
-          </div>
-
-          <div class="edu-dates">
-            Aug 2017 – May 2021 · Gujarat, India
-          </div>
-
-          <div
-            class="edu-gpa-badge"
-            style="
-              background:
-              linear-gradient(
-                135deg,
-                var(--ac2),
-                var(--ac3)
-              );
-            "
-          >
-            GPA: 3.59 / 4.0
-          </div>
-
-          <div class="edu-courses">
-
-            <span class="edu-course">
-              Certified in C — C-DAC 2018
-            </span>
-
-            <span class="edu-course">
-              Certified in C++ — C-DAC 2019
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     CONTACT
-     ===================================================== -->
-
-<section
-  class="mag-section contact-bg"
-  id="contact"
->
-
-  <div class="container">
-
-    <div class="contact-inner">
-
-
-      <div>
-
-        <div
-          class="mag-section-num"
-          style="color:rgba(245,245,247,0.4)"
-        >
-          Issue 05 — Contact
-        </div>
-
-        <h2 class="contact-headline">
-          Let's<br>
-          <span class="grad">
-            Work
-          </span><br>
-          Together
-        </h2>
-
-        <p class="contact-sub">
-          Actively seeking full-time Software /
-          Backend Engineer roles from mid-2026.
-          Open to Nashville, TN or fully remote
-          opportunities.
-        </p>
-
-        <div class="contact-cta">
-
-          <a
-            href="mailto:parthpandya9914@gmail.com"
-            class="cc-btn"
-          >
-            Send Email →
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <div class="contact-links-grid">
-
-
-        <a
-          href="mailto:parthpandya9914@gmail.com"
-          class="cl-item"
-        >
-
-          <div
-            class="cl-icon"
-            style="
-              background:rgba(233,69,96,0.15);
-              color:var(--ac);
-            "
-          >
-            @
-          </div>
-
-          <span>
-            parthpandya9914@gmail.com
-          </span>
-
-        </a>
-
-
-        <a
-          href="https://linkedin.com/in/parth-pandya-dev"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="cl-item"
-        >
-
-          <div
-            class="cl-icon"
-            style="
-              background:rgba(0,119,181,0.2);
-              color:#0a8de8;
-            "
-          >
-            in
-          </div>
-
-          <span>
-            linkedin.com/in/parth-pandya
-          </span>
-
-        </a>
-
-
-        <a
-          href="https://github.com/parth3899"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="cl-item"
-        >
-
-          <div
-            class="cl-icon"
-            style="
-              background:rgba(255,255,255,0.07);
-              color:rgba(245,245,247,0.7);
-            "
-          >
-            gh
-          </div>
-
-          <span>
-            github.com/parth3899
-          </span>
-
-        </a>
-
-
-        <a
-          href="tel:+16292777475"
-          class="cl-item"
-        >
-
-          <div
-            class="cl-icon"
-            style="
-              background:rgba(0,212,170,0.12);
-              color:var(--ac3);
-            "
-          >
-            tel
-          </div>
-
-          <span>
-            +1 629-277-7475
-          </span>
-
-        </a>
-
-
-        <div
-          class="cl-item"
-          style="cursor:default"
-        >
-
-          <div
-            class="cl-icon"
-            style="
-              background:rgba(168,85,247,0.15);
-              color:var(--ac4);
-            "
-          >
-            loc
-          </div>
-
-          <span>
-            Nashville, Tennessee, US
-          </span>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     FOOTER
-     ===================================================== -->
-
-<footer>
-
-  <p>
-    © 2026 Parth Pandya ·
-    Built with HTML/CSS ·
-    Hosted on GitHub Pages
-  </p>
-
-</footer>
-
-
-<!-- =====================================================
-     JAVASCRIPT
-     ===================================================== -->
+<footer>© 2026 PARTH PANDYA — BUILT WITH HTML/CSS</footer>
 
 <script>
+const menuBtn = document.getElementById('menuBtn');
+const mobNav = document.getElementById('mobNav');
+menuBtn.addEventListener('click', () => mobNav.classList.toggle('open'));
+mobNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobNav.classList.remove('open')));
 
-/* =====================
-   MOBILE MENU
-   ===================== */
+const DEVICON = (slug, variant) => `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${slug}/${slug}-${variant}.svg`;
 
-const hamburger =
-  document.getElementById('ham');
+const TECH = [
+  { name: 'Python', short: 'Py', color: '#3776AB', icon: DEVICON('python','original'), desc: 'Used for ML crop-yield models and biosensor data analysis.' },
+  { name: 'Java', short: 'Jv', color: '#EA2D2E', icon: DEVICON('java','original'), desc: 'Core language from academic coursework and OOP-heavy coding.' },
+  { name: 'JavaScript', short: 'JS', color: '#E8B339', icon: DEVICON('javascript','original'), desc: 'Powers front-end interactivity across React and Vue projects.' },
+  { name: 'C#', short: 'C#', color: '#8E5DD1', icon: DEVICON('csharp','original'), desc: '.NET Core services with Entity Framework and LINQ in production.' },
+  { name: 'Django', short: 'Dj', color: '#4F9E5C', icon: DEVICON('django','plain'), desc: 'REST APIs and admin tooling for a client platform with 500+ users.' },
+  { name: 'FastAPI', short: 'Fa', color: '#0AA37F', icon: DEVICON('fastapi','original'), desc: 'Lightweight async services — cut response times by roughly 50%.' },
+  { name: 'Flask', short: 'Fl', color: '#444444', icon: DEVICON('flask','original'), desc: 'Quick backend prototypes and internal tools.' },
+  { name: 'React', short: 'Rx', color: '#2E8CB0', icon: DEVICON('react','original'), desc: 'Component-driven frontends paired with REST and GraphQL APIs.' },
+  { name: 'Vue.js', short: 'Vu', color: '#4FBA7E', icon: DEVICON('vuejs','original'), desc: 'Dashboards and analytics UIs, like the ski-resort weather app.' },
+  { name: 'PostgreSQL', short: 'Pg', color: '#5B9FD1', icon: DEVICON('postgresql','original'), desc: 'Primary relational store for production Django services.' },
+  { name: 'MySQL', short: 'My', color: '#F09A3E', icon: DEVICON('mysql','original'), desc: 'Schema design and query tuning — about 30% faster retrieval.' },
+  { name: 'SQLite', short: 'Sq', color: '#3E97D1', icon: DEVICON('sqlite','original'), desc: 'Lightweight storage for embedded and IoT projects.' },
+  { name: 'Docker', short: 'Do', color: '#3D9BD8', icon: DEVICON('docker','original'), desc: 'Containerized deployments with CI/CD on client infrastructure.' },
+  { name: 'Git', short: 'Gi', color: '#E8622D', icon: DEVICON('git','original'), desc: 'Version control and collaboration across every project.' },
+  { name: 'Linux', short: 'Lx', color: '#111111', icon: DEVICON('linux','original'), desc: 'Deployment target for Raspberry Pi and server-side services.' },
+  { name: 'AWS', short: 'AW', color: '#F0A73C', icon: DEVICON('amazonwebservices','original-wordmark'), desc: 'S3 storage integration — cut video load times by 40%.' },
+  { name: 'Azure', short: 'Az', color: '#3F9CDC', icon: DEVICON('azure','original'), desc: 'Cloud hosting for OAuth-secured full-stack apps.' },
+  { name: '.NET', short: 'Nt', color: '#8E5DD1', icon: DEVICON('dot-net','plain'), desc: 'Production C# services with Entity Framework and LINQ.' },
+  { name: 'SQL Server', short: 'MS', color: '#CC3E45', icon: DEVICON('microsoftsqlserver','plain'), desc: 'Enterprise data layer for .NET-based production systems.' },
+  { name: 'OpenCV', short: 'Cv', color: '#5DA7DE', icon: DEVICON('opencv','original'), desc: 'Real-time image analysis pipelines on Raspberry Pi.' }
+];
 
-const mobileNav =
-  document.getElementById('mobNav');
-
-if (hamburger && mobileNav) {
-
-  hamburger.addEventListener(
-    'click',
-    () => {
-
-      mobileNav.classList.toggle('open');
-
-    }
-  );
-
+function setActive(index) {
+  const t = TECH[index];
+  document.getElementById('stackName').textContent = t.name;
+  document.getElementById('stackDesc').textContent = t.desc;
+  document.querySelectorAll('#isoPlateMain .key').forEach((k, i) => k.classList.toggle('active', i === index));
 }
 
-
-/* Close mobile menu
-   when clicking a link */
-
-document
-  .querySelectorAll('.mob-link')
-  .forEach(link => {
-
-    link.addEventListener(
-      'click',
-      () => {
-
-        mobileNav.classList.remove('open');
-
-      }
-    );
-
+function buildKeyboard() {
+  const plate = document.getElementById('isoPlateMain');
+  TECH.forEach((t, i) => {
+    const key = document.createElement('div');
+    key.className = 'key';
+    key.style.background = t.color;
+    key.innerHTML = `<img src="${t.icon}" alt="${t.name}" onerror="this.replaceWith(Object.assign(document.createElement('span'), {className:'key-fallback', textContent:'${t.short}'}))">`;
+    key.addEventListener('click', (e) => {
+      setActive(i);
+      const rect = key.getBoundingClientRect();
+      const ripple = document.createElement('span');
+      ripple.className = 'key-ripple';
+      ripple.style.left = (e.clientX - rect.left) + 'px';
+      ripple.style.top = (e.clientY - rect.top) + 'px';
+      key.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 500);
+    });
+    plate.appendChild(key);
   });
+}
+buildKeyboard();
+setActive(0);
 
+const isoStage = document.querySelector('.iso-wrap');
+const isoPlateMain = document.getElementById('isoPlateMain');
+if (isoStage && isoPlateMain) {
+  isoStage.addEventListener('mousemove', (e) => {
+    const rect = isoStage.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    isoPlateMain.style.transform = `rotateX(${56 - py * 10}deg) rotateZ(${45 + px * 10}deg)`;
+  });
+  isoStage.addEventListener('mouseleave', () => {
+    isoPlateMain.style.transform = 'rotateX(56deg) rotateZ(45deg)';
+  });
+}
 
-/*
-  EXPERIENCE VISIBILITY FIX
+function badges(containerId, names) {
+  const el = document.getElementById(containerId);
+  names.forEach(n => {
+    const t = TECH.find(x => x.name === n);
+    if (!t) return;
+    const b = document.createElement('span');
+    b.className = 'tech-badge';
+    b.innerHTML = `<img src="${t.icon}" alt="">${t.name}`;
+    el.appendChild(b);
+  });
+}
+badges('badge-stacksummation', ['Django','FastAPI','Docker','PostgreSQL']);
+badges('badge-mindtrunk', ['FastAPI','OpenCV','AWS']);
 
-  We intentionally do NOT hide .exp-row
-  with JavaScript.
+const PROJECTS = [
+  { tag: 'Full-stack', symbol: '{ }', title: 'Car rental system', desc: 'OAuth login, real-time availability, booking management, automated notifications. AWS/Azure with SSL.', bg: 'var(--lime)' },
+  { tag: 'Research', symbol: 'NN', title: 'Hopfield memory networks', desc: 'Associative-memory network from scratch — Hebbian learning, pattern recall under noise.', bg: 'var(--pink)' },
+  { tag: 'IoT', symbol: '⌁', title: 'Water level detection', desc: 'Real-time OpenCV detection with a Tkinter GUI on Raspberry Pi. 30% faster pipeline.', bg: 'var(--blue)' },
+  { tag: 'Agriculture', symbol: '⌘', title: 'AI crop yield predictor', desc: 'Django platform for 500+ farmers, ML yield models (25% boost), Maps + Drive integration.', bg: 'var(--lime)' },
+  { tag: 'Analytics', symbol: '~', title: 'Ski resort weather analytics', desc: '30 years of snowfall analysis surfaced through Vue.js charts on a Django backend.', bg: 'var(--pink)' },
+  { tag: 'Automation', symbol: '⇄', title: 'File conversion tool', desc: 'Django + GraphQL workflow automation, 40% less manual effort, multi-role REST APIs.', bg: 'var(--blue)' }
+];
 
-  The CSS already keeps every experience
-  item visible:
-
-      opacity: 1;
-      transform: none;
-
-  This means the portfolio works even if
-  JavaScript is disabled or an observer
-  fails.
-*/
-
-
-/* =====================
-   ACTIVE NAV LINK
-   ===================== */
-
-const sections =
-  document.querySelectorAll(
-    'section[id]'
-  );
-
-const navLinks =
-  document.querySelectorAll(
-    '.nav-links a'
-  );
-
-const observer =
-  new IntersectionObserver(
-    entries => {
-
-      entries.forEach(entry => {
-
-        if (entry.isIntersecting) {
-
-          navLinks.forEach(link => {
-
-            link.classList.remove(
-              'active'
-            );
-
-            if (
-              link.getAttribute('href') ===
-              '#' + entry.target.id
-            ) {
-
-              link.classList.add(
-                'active'
-              );
-
-            }
-
-          });
-
-        }
-
-      });
-
-    },
-    {
-      rootMargin:
-        '-30% 0px -60% 0px'
-    }
-  );
-
-sections.forEach(section => {
-
-  observer.observe(section);
-
+const projGrid = document.getElementById('projGrid');
+PROJECTS.forEach(p => {
+  const card = document.createElement('a');
+  card.className = 'proj-card';
+  card.href = 'https://github.com/parth3899';
+  card.target = '_blank';
+  card.rel = 'noopener noreferrer';
+  card.innerHTML = `
+    <div class="proj-thumb" style="background:${p.bg}">${p.symbol}</div>
+    <div class="proj-body">
+      <h3>${p.title}</h3>
+      <p>${p.desc}</p>
+      <span class="proj-pill">${p.tag}</span>
+    </div>`;
+  projGrid.appendChild(card);
 });
 
+const cfMessage = document.getElementById('cfMessage');
+const cfCount = document.getElementById('cfCount');
+cfMessage.addEventListener('input', () => { cfCount.textContent = cfMessage.value.length; });
+
+document.getElementById('contactForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const name = document.getElementById('cfName').value.trim();
+  const email = document.getElementById('cfEmail').value.trim();
+  const message = cfMessage.value.trim();
+  const subject = encodeURIComponent(`Portfolio message from ${name}`);
+  const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+  window.location.href = `mailto:parthpandya9914@gmail.com?subject=${subject}&body=${body}`;
+});
 </script>
 
 </body>
